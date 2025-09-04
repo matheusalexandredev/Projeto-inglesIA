@@ -1,0 +1,474 @@
+/* ===================== Global ===================== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    display: flex;
+    height: 100vh;
+    background-color: #f4f7f9;
+    color: #333;
+}
+
+#container {
+    display: flex;
+    width: 100%;
+}
+
+/* ===================== Sidebar ===================== */
+#sidebar {
+    width: 220px;
+    background: #2c3e50;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 25px 20px;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+#sidebar h2 {
+    margin-bottom: 25px;
+    font-size: 22px;
+    letter-spacing: 1px;
+}
+
+#sidebar button {
+    margin-bottom: 12px;
+    padding: 12px;
+    cursor: pointer;
+    background: #34495e;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: all 0.2s ease;
+}
+
+#sidebar button:hover {
+    background: #1abc9c;
+    transform: translateX(3px);
+}
+
+/* ===================== Main Content ===================== */
+#mainContent {
+    flex: 1;
+    padding: 25px;
+    background: #ecf0f1;
+    overflow-y: auto;
+}
+
+/* ===================== Sections ===================== */
+.section {
+    display: block;
+}
+
+.section.hidden {
+    display: none;
+}
+
+/* Container do chat */
+#chat {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    height: 500px;
+    overflow-y: auto;
+}
+
+/* Cada mensagem */
+.message-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-width: 85%;
+}
+
+/* Usuário */
+.message-wrapper.user {
+    align-self: flex-end;
+    text-align: right;
+}
+
+.message-wrapper.user .message {
+    background: #f7f7f8;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    line-height: 1.4;
+    color: #111;
+    border: 1px solid #e0e0e0;
+}
+
+/* IA */
+.message-wrapper.ia {
+    align-self: flex-start;
+    text-align: left;
+}
+
+.message-wrapper.ia .message {
+    background: #f7f7f8;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    line-height: 1.4;
+    color: #111;
+    border: 1px solid #e0e0e0;
+}
+
+/* Input fixo abaixo */
+#chat-section {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#chat-section input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    flex: 1;
+}
+
+#chat-section button {
+    background: #10a37f;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 8px;
+    transition: background 0.2s;
+}
+
+#chat-section button:hover {
+    background: #0e906f;
+}
+
+/* Input + botão lado a lado */
+#chat-section input, 
+#chat-section button {
+    font-family: inherit;
+}
+
+#chat-section {
+    gap: 12px;
+}
+
+#chat-section > div:last-child {
+    display: flex;
+    gap: 8px;
+}
+
+
+/* ===================== Inputs & Buttons ===================== */
+#exerciseBox input,
+#exerciseBox button,
+#exerciseOptions button,
+#nextBtn {
+    font-family: inherit;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+#exerciseBox input {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+#exerciseBox input:focus {
+    border-color: #1abc9c;
+    box-shadow: 0 0 5px rgba(26, 188, 156, 0.3);
+}
+
+#exerciseBox button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background-color: #1abc9c;
+    color: white;
+    font-weight: bold;
+}
+
+#exerciseBox button:hover {
+    background-color: #16a085;
+    transform: translateY(-2px);
+}
+
+#exerciseOptions {
+    display: flex;
+    flex-direction: column;
+    margin-top: 12px;
+}
+
+#exerciseOptions button {
+    margin: 5px 0;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #eee;
+}
+
+#exerciseOptions button:hover {
+    background-color: #dcdcdc;
+    transform: translateY(-1px);
+}
+
+#nextBtn {
+    margin-top: 20px;
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: none;
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+}
+
+#nextBtn:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+/* ===================== Resultado do Exercício ===================== */
+#exerciseResult {
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* ===================== Área de Exercícios Rápidos ===================== */
+#exercise-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centraliza horizontalmente */
+    justify-content: center; /* centraliza verticalmente */
+    height: 100%;
+    text-align: center;
+    padding: 20px;
+}
+
+#exerciseBox {
+    background: #ffffff;
+    padding: 25px 35px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    width: 320px;
+    max-width: 90%;
+}
+
+#exerciseBox p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+#exerciseBox input {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+#exerciseBox input:focus {
+    border-color: #1abc9c;
+    box-shadow: 0 0 6px rgba(26,188,156,0.3);
+}
+
+#exerciseBox button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    background-color: #1abc9c;
+    color: white;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+#exerciseBox button:hover {
+    background-color: #16a085;
+    transform: translateY(-2px);
+}
+
+#exerciseOptions {
+    display: flex;
+    flex-direction: column;
+    margin-top: 12px;
+}
+
+#exerciseOptions button {
+    margin: 5px 0;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #eee;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#exerciseOptions button:hover {
+    background-color: #dcdcdc;
+    transform: translateY(-1px);
+}
+
+#nextBtn {
+    margin-top: 20px;
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: none;
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#nextBtn:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+/* ===================== Resultado do Exercício ===================== */
+#exerciseResult {
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: 600;
+    min-height: 22px; 
+    color: #333;
+}
+/* Botão Verificar */
+#checkBtn {
+    margin-top: 10px;
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: none;
+    background-color: #27ae60;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+}
+
+#checkBtn:hover {
+    background-color: #219150;
+    transform: translateY(-2px);
+}
+
+/* Resultado */
+#exerciseResult {
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: 600;
+    min-height: 22px;
+    color: #333;
+}
+/* Chat Section estilo ChatGPT */
+#chat-section {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#chat {
+    flex: 1;
+    padding: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Área de input sempre no rodapé */
+#chat-input-area {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+#chat-input-area input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+#chat-input-area button {
+    background: #10a37f;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#chat-input-area button:hover {
+    background: #0e906f;
+}
+
+/* Mensagens (estilo ChatGPT) */
+.message-wrapper {
+    display: flex;
+    flex-direction: column;
+    max-width: 85%;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.message-wrapper.user {
+    align-self: flex-end;
+    text-align: left;
+}
+
+.message-wrapper.ia {
+    align-self: flex-start;
+    text-align: left;
+}
+
+.message {
+    background: #f7f7f8;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 12px 16px;
+    color: #111;
+}
+/* Imagem de perfil nas mensagens do chat */
+.message-wrapper img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 4px;
+}
+
+.message-wrapper.user {
+    align-self: flex-end;
+    text-align: right;
+}
+.message-wrapper.ia {
+    align-self: flex-start;
+    text-align: left;
+}
+.section.hidden {
+    display: none;
+}

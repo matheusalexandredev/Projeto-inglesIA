@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudo de Inglês com IA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="container">
+    <div id="sidebar">
+        <h2>Menu</h2>
+        <button onclick="showSection('chat')">Chat IA</button>
+        <button onclick="showSection('exercise')">Exercícios Rápidos</button>
+    </div>
+
+    <div id="mainContent">
+        <!-- Chat IA -->
+        <div id="chat-section" class="section">
+            <!-- Área das mensagens -->
+            <div id="chat"></div>
+
+            <!-- Área de input -->
+            <div id="chat-input-area">
+                <input type="text" id="userInput" placeholder="Escreva sua mensagem...">
+                <button onclick="sendMessage()">Enviar</button>
+            </div>
+        </div>
+
+        <!-- Exercícios Rápidos -->
+        <div id="exercise-section" class="section hidden">
+            <div id="exerciseBox">
+                <p id="exerciseQuestion"></p>
+                <input type="text" id="exerciseInput" placeholder="Digite sua resposta">
+                <div id="exerciseOptions"></div>
+                <p id="exerciseResult"></p>
+
+                <!-- Botão de verificação -->
+                <button id="checkBtn" onclick="checkExercise()">Verificar</button>
+
+                <!-- Botão de próxima questão -->
+                <button id="nextBtn" onclick="nextExercise()">Próxima questão</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
