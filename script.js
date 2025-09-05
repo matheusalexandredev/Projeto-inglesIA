@@ -272,16 +272,36 @@ function startGame(gameType) {
     const gameArea = document.getElementById("gameArea");
     gameArea.innerHTML = ""; // limpa antes
 
+function startGame(gameType) {
+    const gameArea = document.getElementById("gameArea");
+
     if (gameType === "forca") {
-        gameArea.innerHTML = "<h3>🪢 Jogo da Forca</h3><p>Em breve...</p>";
-        // Aqui depois você coloca a lógica da forca
+        gameArea.innerHTML = `
+            <h3>🪢 Jogo da Forca</h3>
+            <div class="forca-palavra">_ _ _ _</div>
+            <p>Dica: Animal</p>
+            <input type="text" maxlength="1" placeholder="Digite uma letra">
+            <button>Tentar</button>
+        `;
     } else if (gameType === "quiz") {
-        gameArea.innerHTML = "<h3>❓ Quiz</h3><p>Em breve...</p>";
-        // Aqui depois você coloca perguntas/respostas
+        gameArea.innerHTML = `
+            <h3>❓ Quiz</h3>
+            <p>Pergunta: Qual é a capital da França?</p>
+            <div class="quiz-options">
+                <button>Paris</button>
+                <button>Roma</button>
+                <button>Londres</button>
+            </div>
+        `;
     } else if (gameType === "completar") {
-        gameArea.innerHTML = "<h3>✍️ Completar Frases</h3><p>Em breve...</p>";
-        // Aqui depois você coloca frases com lacunas
+        gameArea.innerHTML = `
+            <h3>✍️ Completar Frases</h3>
+            <p>Complete: "I ____ to school every day."</p>
+            <input type="text" class="completar-input" placeholder="Digite a palavra">
+            <button>Verificar</button>
+        `;
     }
+}
 }
 function goToSection(sectionId) {
     // Esconde todas as seções
