@@ -1,72 +1,53 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estudo de Inglês com IA</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <div id="container">
-<div id="sidebar">
-    <h2>Menu</h2>
-    <button onclick="goToSection('chat-section')">Chat IA</button>
-    <button onclick="goToSection('exercise-section')">Exercícios Rápidos</button>
-    <button onclick="goToSection('games-section')">Jogos Educativos</button>
-</div>
-
-        <div id="mainContent">
-            <!-- Chat IA -->
-            <div id="chat-section" class="section">
-                <!-- Área das mensagens -->
-                <div id="chat"></div>
-
-                <!-- Área de input -->
-                <div id="chat-input-area">
-                    <input type="text" id="userInput" placeholder="Escreva sua mensagem...">
-                    <button onclick="sendMessage()">Enviar</button>
-                </div>
-            </div>
-
-            <!-- Exercícios Rápidos -->
-            <div id="exercise-section" class="section hidden">
-                <div id="exerciseBox">
-                    <p id="exerciseQuestion"></p>
-                    <input type="text" id="exerciseInput" placeholder="Digite sua resposta">
-                    <div id="exerciseOptions"></div>
-                    <p id="exerciseResult"></p>
-
-                    <!-- Placar -->
-                    <div id="scoreBoard" aria-live="polite" style="margin-top:12px;">
-                        <small>Acertos: <span id="correctCount">0</span></small>
-                        &nbsp;&middot;&nbsp;
-                        <small>Pontos: <span id="scorePoints">0</span> ⭐</small>
-                    </div>
-
-                    <!-- Botões -->
-                    <button id="checkBtn" onclick="checkExercise()">Verificar</button>
-                    <button id="nextBtn" onclick="nextExercise()">Próxima questão</button>
-                </div>
-            </div>
-            <div id="games-section" class="section hidden">
-                <h2>🎮 Jogos Educativos</h2>
-                <p>Escolha um jogo para praticar inglês:</p>
-
-                <div class="game-menu">
-                    <button onclick="startGame('forca')">Forca</button>
-                    <button onclick="startGame('quiz')">Quiz</button>
-                    <button onclick="startGame('completar')">Completar Frases</button>
-                </div>
-
-                <!-- Área onde o jogo será renderizado -->
-                <div id="gameArea"></div>
-            </div>
-        </div>
+<div id="container">
+    <!-- Barra lateral -->
+    <div id="sidebar">
+        <h2>Menu</h2>
+        <button type="button" onclick="showSection('chat')">💬 Chat IA</button>
+        <button type="button" onclick="showSection('exercise')">📘 Exercícios Rápidos</button>
     </div>
 
-    <script src="script.js"></script>
-</body>
+    <!-- Conteúdo principal -->
+    <div id="mainContent">
 
+        <!-- Chat -->
+        <div id="chat-section" class="section">
+            <div id="chat"></div>
+            <div id="chat-input-area">
+                <input type="text" id="userInput" placeholder="Escreva sua mensagem...">
+                <button type="button" onclick="sendMessage()">Enviar</button>
+            </div>
+        </div>
+
+        <!-- Exercícios Rápidos -->
+        <div id="exercise-section" class="section hidden">
+            <h3>📘 Exercícios Rápidos</h3>
+            <!-- Placar -->
+            <div id="scoreboard">
+                ✅ Acertos: <span id="correctCount">0</span> |
+                ⭐ Pontos: <span id="scorePoints">0</span>
+            </div>
+            <div id="exerciseBox">
+                <p id="exerciseQuestion"></p>
+                <input type="text" id="exerciseInput" placeholder="Digite sua resposta">
+                <div id="exerciseOptions"></div>
+                <p id="exerciseResult"></p>
+                <button type="button" id="checkBtn" onclick="checkExercise()">Verificar</button>
+                <button type="button" id="nextBtn" onclick="nextExercise()" disabled>Próxima questão</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
 </html>

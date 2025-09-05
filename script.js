@@ -29,7 +29,6 @@ async function sendMessage() {
         else if (data.error) addMessage("IA", "⚠️ Erro: " + data.error, "ia");
         else addMessage("IA", "⚠️ Resposta inesperada do servidor.", "ia");
     } catch (err) {
-        console.error(err);
         typingIndicator.remove();
         addMessage("IA", "⚠️ Não consegui me conectar ao servidor.", "ia");
     }
@@ -40,7 +39,7 @@ function addMessage(sender, text, type) {
     const chat = document.getElementById("chat");
 
     const wrapper = document.createElement("div");
-    wrapper.classList.add("message-wrapper", type); // "user" ou "ia"
+    wrapper.classList.add("message-wrapper", type);
 
     const avatar = document.createElement("img");
     avatar.src = getAvatar(type);
@@ -48,7 +47,6 @@ function addMessage(sender, text, type) {
 
     const msg = document.createElement("div");
     msg.classList.add("message", type);
-    // aceita HTML (para markdown quando implementar), aqui usamos texto direto
     msg.innerHTML = `<strong>${sender}:</strong> ${escapeHtml(text)}`;
 
     wrapper.appendChild(avatar);
@@ -57,7 +55,7 @@ function addMessage(sender, text, type) {
     chat.scrollTop = chat.scrollHeight;
 }
 
-// simples escapador (prevenir injeção ao usar innerHTML)
+// ===== Escapar HTML =====
 function escapeHtml(unsafe) {
     return unsafe
         .replace(/&/g, "&amp;")
@@ -67,7 +65,7 @@ function escapeHtml(unsafe) {
         .replace(/'/g, "&#039;");
 }
 
-// ===== Indicador de "digitando..." =====
+// ===== Indicador "digitando..." =====
 function addTyping() {
     const chat = document.getElementById("chat");
     const wrapper = document.createElement("div");
@@ -91,14 +89,9 @@ function addTyping() {
 
 // ===== Navegação lateral =====
 function showSection(section) {
-    // Oculta todas as seções
     document.querySelectorAll(".section").forEach(s => s.classList.add("hidden"));
-
-    // Mostra apenas a seção desejada
     const sec = document.getElementById(section + "-section");
     if (sec) sec.classList.remove("hidden");
-
-    // Inicializa exercícios se for a seção de exercícios
     if (section === "exercise") showExercise();
 }
 
@@ -114,17 +107,14 @@ const exercises = [
 
 let currentExercise = 0;
 let selectedOption = null;
-
-// ===== Placar =====
 let correctCount = 0;
 let scorePoints = 0;
-let lastChecked = false; // evita dupla contagem na mesma questão
+let lastChecked = false;
 
+// ===== Placar =====
 function updateScoreboard() {
-    const c = document.getElementById("correctCount");
-    const s = document.getElementById("scorePoints");
-    if (c) c.textContent = correctCount;
-    if (s) s.textContent = scorePoints;
+    document.getElementById("correctCount").textContent = correctCount;
+    document.getElementById("scorePoints").textContent = scorePoints;
 }
 
 // ===== Mostrar exercício =====
@@ -137,21 +127,16 @@ function showExercise() {
     const checkBtn = document.getElementById("checkBtn");
     const nextBtn = document.getElementById("nextBtn");
 
-    if (!q || !questionEl) return;
+    if (!q) return;
 
     questionEl.textContent = q.question;
     result.textContent = "";
     selectedOption = null;
     lastChecked = false;
 
-    // habilita/desabilita botões: verificar ativo, próxima desativada até checar
-    if (checkBtn) {
-        checkBtn.disabled = false;
-        checkBtn.textContent = "Verificar";
-    }
-    if (nextBtn) nextBtn.disabled = true;
+    checkBtn.disabled = false;
+    nextBtn.disabled = true;
 
-    // limpar opções e input
     if (q.type === "translate") {
         input.style.display = "block";
         input.value = "";
@@ -169,25 +154,17 @@ function showExercise() {
             optionsBox.appendChild(btn);
         });
     }
-
-    // atualiza placar visual
     updateScoreboard();
 }
 
 // ===== Selecionar opção =====
 function selectOption(option, event) {
     selectedOption = option;
-
-    // remove seleção antiga
     document.querySelectorAll("#exerciseOptions button").forEach(btn => {
         btn.classList.remove("selected");
         btn.style.background = "#eee";
     });
-
-    // marca novo
-    const btn = event.currentTarget || event.target;
-    btn.classList.add("selected");
-    btn.style.background = "#90ee90";
+    event.currentTarget.style.background = "#90ee90";
 }
 
 // ===== Verificar resposta =====
@@ -197,83 +174,58 @@ function checkExercise() {
     const checkBtn = document.getElementById("checkBtn");
     const nextBtn = document.getElementById("nextBtn");
 
-    if (!q) return;
-
-    // evita conferir duas vezes
-    if (lastChecked) {
-        return;
-    }
+    if (!q || lastChecked) return;
 
     if (q.type === "translate") {
-        const answerInput = document.getElementById("exerciseInput");
-        const answer = answerInput ? answerInput.value.trim().toLowerCase() : "";
-
+        const answer = document.getElementById("exerciseInput").value.trim().toLowerCase();
         if (!answer) {
             result.textContent = "⚠️ Digite sua resposta antes de verificar.";
             result.style.color = "orange";
             return;
         }
-
         if (answer === q.answer.toLowerCase()) {
             result.textContent = "✅ Correto!";
             result.style.color = "green";
-
-            // atualizar placar
             correctCount++;
             scorePoints += 10;
         } else {
             result.textContent = `❌ Errado! Resposta certa: ${q.answer}`;
             result.style.color = "red";
         }
-
     } else if (q.type === "multiple") {
         if (!selectedOption) {
             result.textContent = "⚠️ Escolha uma opção!";
             result.style.color = "orange";
             return;
         }
-
         if (selectedOption.toLowerCase() === q.answer.toLowerCase()) {
             result.textContent = "✅ Correto!";
             result.style.color = "green";
-
-            // atualizar placar
             correctCount++;
             scorePoints += 10;
         } else {
             result.textContent = `❌ Errado! Resposta certa: ${q.answer}`;
             result.style.color = "red";
         }
-
-        // reset visual das opções (mantemos resultado visível)
-        document.querySelectorAll("#exerciseOptions button").forEach(btn => {
-            btn.disabled = true;
-        });
+        document.querySelectorAll("#exerciseOptions button").forEach(btn => btn.disabled = true);
     }
 
-    // bloquear verificar e habilitar próxima questão
-    if (checkBtn) checkBtn.disabled = true;
-    if (nextBtn) nextBtn.disabled = false;
+    checkBtn.disabled = true;
+    nextBtn.disabled = false;
     lastChecked = true;
-
-    // atualizar placar visual
     updateScoreboard();
 }
 
 // ===== Próxima questão =====
 function nextExercise() {
-    // avançar índice
     currentExercise = (currentExercise + 1) % exercises.length;
-
-    // reabilitar botões e mostrar exercício
     showExercise();
 }
-function startGame(gameType) {
-    const gameArea = document.getElementById("gameArea");
-    gameArea.innerHTML = ""; // limpa antes
 
+// ===== Jogos extras =====
 function startGame(gameType) {
     const gameArea = document.getElementById("gameArea");
+    if (!gameArea) return;
 
     if (gameType === "forca") {
         gameArea.innerHTML = `
@@ -302,19 +254,6 @@ function startGame(gameType) {
         `;
     }
 }
-}
-function goToSection(sectionId) {
-    // Esconde todas as seções
-    document.querySelectorAll(".section").forEach(sec => sec.classList.add("hidden"));
 
-    // Mostra apenas a escolhida
-    const target = document.getElementById(sectionId);
-    if (target) {
-        target.classList.remove("hidden");
-        // Faz rolagem suave até a seção
-        target.scrollIntoView({ behavior: "smooth" });
-    }
-}
-
-// ===== Inicializar mostrando chat =====
+// ===== Inicialização =====
 showSection('chat');
