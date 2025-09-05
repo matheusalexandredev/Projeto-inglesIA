@@ -510,3 +510,38 @@ body {
         opacity: 1;
     }
 }
+/* Placar (score) */
+#scoreBoard {
+    margin-top: 12px;
+    padding: 8px 10px;
+    background: #f8fbfb;
+    border-radius: 8px;
+    border: 1px solid #e6f0ef;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    font-weight: 600;
+    color: #135c4a;
+}
+
+/* Botões desabilitados */
+#checkBtn:disabled,
+#nextBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* Pequena cor de aviso para resultado */
+#exerciseResult { 
+    margin-top: 12px;
+    font-size: 15px;
+    min-height: 20px;
+}
+
+/* Destaque do botão ativo de opção */
+#exerciseOptions button.selected {
+    background-color: #90ee90;
+    border-color: #6bd36b;
+}
+

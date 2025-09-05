@@ -35,6 +35,7 @@ async function sendMessage() {
     }
 }
 
+// ===== Adicionar mensagem no chat =====
 function addMessage(sender, text, type) {
     const chat = document.getElementById("chat");
 
@@ -47,7 +48,8 @@ function addMessage(sender, text, type) {
 
     const msg = document.createElement("div");
     msg.classList.add("message", type);
-    msg.innerHTML = `<strong>${sender}:</strong> ${text}`;
+    // aceita HTML (para markdown quando implementar), aqui usamos texto direto
+    msg.innerHTML = `<strong>${sender}:</strong> ${escapeHtml(text)}`;
 
     wrapper.appendChild(avatar);
     wrapper.appendChild(msg);
@@ -55,6 +57,17 @@ function addMessage(sender, text, type) {
     chat.scrollTop = chat.scrollHeight;
 }
 
+// simples escapador (prevenir injeção ao usar innerHTML)
+function escapeHtml(unsafe) {
+    return unsafe
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#039;");
+}
+
+// ===== Indicador de "digitando..." =====
 function addTyping() {
     const chat = document.getElementById("chat");
     const wrapper = document.createElement("div");
@@ -102,6 +115,18 @@ const exercises = [
 let currentExercise = 0;
 let selectedOption = null;
 
+// ===== Placar =====
+let correctCount = 0;
+let scorePoints = 0;
+let lastChecked = false; // evita dupla contagem na mesma questão
+
+function updateScoreboard() {
+    const c = document.getElementById("correctCount");
+    const s = document.getElementById("scorePoints");
+    if (c) c.textContent = correctCount;
+    if (s) s.textContent = scorePoints;
+}
+
 // ===== Mostrar exercício =====
 function showExercise() {
     const q = exercises[currentExercise];
@@ -109,11 +134,24 @@ function showExercise() {
     const input = document.getElementById("exerciseInput");
     const optionsBox = document.getElementById("exerciseOptions");
     const result = document.getElementById("exerciseResult");
+    const checkBtn = document.getElementById("checkBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    if (!q || !questionEl) return;
 
     questionEl.textContent = q.question;
     result.textContent = "";
     selectedOption = null;
+    lastChecked = false;
 
+    // habilita/desabilita botões: verificar ativo, próxima desativada até checar
+    if (checkBtn) {
+        checkBtn.disabled = false;
+        checkBtn.textContent = "Verificar";
+    }
+    if (nextBtn) nextBtn.disabled = true;
+
+    // limpar opções e input
     if (q.type === "translate") {
         input.style.display = "block";
         input.value = "";
@@ -131,52 +169,105 @@ function showExercise() {
             optionsBox.appendChild(btn);
         });
     }
+
+    // atualiza placar visual
+    updateScoreboard();
 }
 
 // ===== Selecionar opção =====
 function selectOption(option, event) {
     selectedOption = option;
-    document.querySelectorAll("#exerciseOptions button").forEach(btn => btn.style.background = "#eee");
-    event.target.style.background = "#90ee90";
+
+    // remove seleção antiga
+    document.querySelectorAll("#exerciseOptions button").forEach(btn => {
+        btn.classList.remove("selected");
+        btn.style.background = "#eee";
+    });
+
+    // marca novo
+    const btn = event.currentTarget || event.target;
+    btn.classList.add("selected");
+    btn.style.background = "#90ee90";
 }
 
 // ===== Verificar resposta =====
 function checkExercise() {
     const q = exercises[currentExercise];
     const result = document.getElementById("exerciseResult");
+    const checkBtn = document.getElementById("checkBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    if (!q) return;
+
+    // evita conferir duas vezes
+    if (lastChecked) {
+        return;
+    }
 
     if (q.type === "translate") {
-        const answer = document.getElementById("exerciseInput").value.trim().toLowerCase();
+        const answerInput = document.getElementById("exerciseInput");
+        const answer = answerInput ? answerInput.value.trim().toLowerCase() : "";
+
+        if (!answer) {
+            result.textContent = "⚠️ Digite sua resposta antes de verificar.";
+            result.style.color = "orange";
+            return;
+        }
+
         if (answer === q.answer.toLowerCase()) {
             result.textContent = "✅ Correto!";
             result.style.color = "green";
+
+            // atualizar placar
+            correctCount++;
+            scorePoints += 10;
         } else {
             result.textContent = `❌ Errado! Resposta certa: ${q.answer}`;
             result.style.color = "red";
         }
-    } else {
+
+    } else if (q.type === "multiple") {
         if (!selectedOption) {
             result.textContent = "⚠️ Escolha uma opção!";
             result.style.color = "orange";
             return;
         }
-        if (selectedOption === q.answer) {
+
+        if (selectedOption.toLowerCase() === q.answer.toLowerCase()) {
             result.textContent = "✅ Correto!";
             result.style.color = "green";
+
+            // atualizar placar
+            correctCount++;
+            scorePoints += 10;
         } else {
             result.textContent = `❌ Errado! Resposta certa: ${q.answer}`;
             result.style.color = "red";
         }
-        selectedOption = null;
+
+        // reset visual das opções (mantemos resultado visível)
+        document.querySelectorAll("#exerciseOptions button").forEach(btn => {
+            btn.disabled = true;
+        });
     }
+
+    // bloquear verificar e habilitar próxima questão
+    if (checkBtn) checkBtn.disabled = true;
+    if (nextBtn) nextBtn.disabled = false;
+    lastChecked = true;
+
+    // atualizar placar visual
+    updateScoreboard();
 }
 
 // ===== Próxima questão =====
 function nextExercise() {
+    // avançar índice
     currentExercise = (currentExercise + 1) % exercises.length;
+
+    // reabilitar botões e mostrar exercício
     showExercise();
 }
 
 // ===== Inicializar mostrando chat =====
 showSection('chat');
-

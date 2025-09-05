@@ -28,20 +28,25 @@
         </div>
 
         <!-- Exercícios Rápidos -->
-        <div id="exercise-section" class="section hidden">
-            <div id="exerciseBox">
-                <p id="exerciseQuestion"></p>
-                <input type="text" id="exerciseInput" placeholder="Digite sua resposta">
-                <div id="exerciseOptions"></div>
-                <p id="exerciseResult"></p>
+<div id="exercise-section" class="section hidden">
+<div id="exerciseBox">
+    <p id="exerciseQuestion"></p>
+    <input type="text" id="exerciseInput" placeholder="Digite sua resposta">
+    <div id="exerciseOptions"></div>
+    <p id="exerciseResult"></p>
 
-                <!-- Botão de verificação -->
-                <button id="checkBtn" onclick="checkExercise()">Verificar</button>
+    <!-- Placar -->
+    <div id="scoreBoard" aria-live="polite" style="margin-top:12px;">
+        <small>Acertos: <span id="correctCount">0</span></small>
+        &nbsp;&middot;&nbsp;
+        <small>Pontos: <span id="scorePoints">0</span> ⭐</small>
+    </div>
 
-                <!-- Botão de próxima questão -->
-                <button id="nextBtn" onclick="nextExercise()">Próxima questão</button>
-            </div>
-        </div>
+    <!-- Botões -->
+    <button id="checkBtn" onclick="checkExercise()">Verificar</button>
+    <button id="nextBtn" onclick="nextExercise()">Próxima questão</button>
+</div>
+</div>
     </div>
 </div>
 
