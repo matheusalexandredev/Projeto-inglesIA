@@ -557,3 +557,41 @@ body {
     background-color: #90ee90;
     border-color: #6bd36b;
 }
+
+#games-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.game-menu {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.game-menu button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: #8e44ad;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.game-menu button:hover {
+    background-color: #732d91;
+    transform: translateY(-2px);
+}
+
+#gameArea {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    min-width: 300px;
+    text-align: center;
+}

@@ -14,6 +14,7 @@
             <h2>Menu</h2>
             <button onclick="showSection('chat')">Chat IA</button>
             <button onclick="showSection('exercise')">Exercícios Rápidos</button>
+            <button onclick="showSection('games')">Jogos Educativos</button>
         </div>
 
         <div id="mainContent">
@@ -48,6 +49,19 @@
                     <button id="checkBtn" onclick="checkExercise()">Verificar</button>
                     <button id="nextBtn" onclick="nextExercise()">Próxima questão</button>
                 </div>
+            </div>
+            <div id="games-section" class="section hidden">
+                <h2>🎮 Jogos Educativos</h2>
+                <p>Escolha um jogo para praticar inglês:</p>
+
+                <div class="game-menu">
+                    <button onclick="startGame('forca')">Forca</button>
+                    <button onclick="startGame('quiz')">Quiz</button>
+                    <button onclick="startGame('completar')">Completar Frases</button>
+                </div>
+
+                <!-- Área onde o jogo será renderizado -->
+                <div id="gameArea"></div>
             </div>
         </div>
     </div>

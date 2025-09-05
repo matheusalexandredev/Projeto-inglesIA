@@ -268,6 +268,21 @@ function nextExercise() {
     // reabilitar botões e mostrar exercício
     showExercise();
 }
+function startGame(gameType) {
+    const gameArea = document.getElementById("gameArea");
+    gameArea.innerHTML = ""; // limpa antes
+
+    if (gameType === "forca") {
+        gameArea.innerHTML = "<h3>🪢 Jogo da Forca</h3><p>Em breve...</p>";
+        // Aqui depois você coloca a lógica da forca
+    } else if (gameType === "quiz") {
+        gameArea.innerHTML = "<h3>❓ Quiz</h3><p>Em breve...</p>";
+        // Aqui depois você coloca perguntas/respostas
+    } else if (gameType === "completar") {
+        gameArea.innerHTML = "<h3>✍️ Completar Frases</h3><p>Em breve...</p>";
+        // Aqui depois você coloca frases com lacunas
+    }
+}
 
 // ===== Inicializar mostrando chat =====
 showSection('chat');
