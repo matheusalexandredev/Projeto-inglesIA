@@ -179,3 +179,4 @@ function nextExercise() {
 
 // ===== Inicializar mostrando chat =====
 showSection('chat');
+
