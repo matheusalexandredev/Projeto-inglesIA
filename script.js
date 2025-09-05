@@ -283,6 +283,18 @@ function startGame(gameType) {
         // Aqui depois você coloca frases com lacunas
     }
 }
+function goToSection(sectionId) {
+    // Esconde todas as seções
+    document.querySelectorAll(".section").forEach(sec => sec.classList.add("hidden"));
+
+    // Mostra apenas a escolhida
+    const target = document.getElementById(sectionId);
+    if (target) {
+        target.classList.remove("hidden");
+        // Faz rolagem suave até a seção
+        target.scrollIntoView({ behavior: "smooth" });
+    }
+}
 
 // ===== Inicializar mostrando chat =====
 showSection('chat');
