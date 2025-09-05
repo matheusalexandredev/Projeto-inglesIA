@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro - Estudo de Inglês</title>
+  <link rel="stylesheet" href="register.css">
+</head>
+<body>
+  <div class="auth-container">
+    <h2>Inscreva-se</h2>
+    <form onsubmit="register(event)">
+      <input type="text" id="registerName" placeholder="Nome" required>
+      <input type="email" id="registerEmail" placeholder="Email" required>
+      <input type="password" id="registerPassword" placeholder="Senha" required>
+      <button type="submit">Cadastrar</button>
+    </form>
+    <p>Já tem conta? <a href="index.html">Login</a></p>
+  </div>
+
+  <script src="register.js"></script>
+</body>
+</html>
