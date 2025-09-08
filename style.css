@@ -12,49 +12,72 @@ body {
     display: flex;
     width: 100%;
 }
-/*==============começo==================*/
-/* ===================== Página Inicial ===================== */
+/* ===== Estilo da página inicial ===== */
 #home-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh; /* centraliza na tela */
+    text-align: center;
+    padding: 40px;
+    background: linear-gradient(135deg, #f0f8ff, #e6f7ff);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 60px; /* espaço maior antes da próxima div */
 }
 
 .home-box {
-  max-width: 720px;
-  background: #ffffff;
-  padding: 32px;
-  border-radius: 16px;
-  box-shadow: 0 8px 28px rgba(0,0,0,0.08);
-  text-align: center;
+    max-width: 700px;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+    animation: fadeIn 1s ease-in-out;
 }
 
 .home-box h1 {
-  font-size: 28px;
-  margin-bottom: 18px;
-  color: #2c3e50;
+    font-size: 2.2rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
 }
 
 .home-box p {
-  font-size: 16px;
-  margin-bottom: 16px;
-  color: #555;
-  line-height: 1.6;
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 15px;
+    line-height: 1.6;
 }
 
 .home-box ul {
-  text-align: left;
-  margin: 0 auto 20px auto;
-  padding: 0 18px;
-  max-width: 520px;
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
 }
 
 .home-box ul li {
-  font-size: 15px;
-  margin-bottom: 8px;
-  color: #333;
-  line-height: 1.5;
+    font-size: 1.1rem;
+    margin: 10px 0;
+    background: #f9f9f9;
+    padding: 12px 18px;
+    border-radius: 10px;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.home-box ul li:hover {
+    background: #e3f2fd;
+    transform: translateX(5px);
+}
+
+/* ===== Animação ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* ===================== Sidebar ===================== */
