@@ -420,3 +420,35 @@ body {
 .section.hidden {
     display: none;
 }
+/* ===== Ranking ===== */
+#ranking-section {
+    padding: 20px;
+}
+
+#rankingTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+#rankingTable th, #rankingTable td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+#rankingTable th {
+    background-color: #2196f3;
+    color: white;
+    font-size: 1.1rem;
+}
+
+#rankingTable tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#rankingTable tr:hover {
+    background-color: #e3f2fd;
+}
+

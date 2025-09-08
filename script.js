@@ -89,15 +89,12 @@ function addTyping() {
 
 // ===== Navegação lateral =====
 function showSection(section) {
-    // esconde todas as seções
     document.querySelectorAll(".section").forEach(s => s.classList.add("hidden"));
-
-    // mostra só a seção clicada
-    const sec = document.getElementById(section);
+    const sec = document.getElementById(section + "-section");
     if (sec) sec.classList.remove("hidden");
 
-    // se for exercícios, carregar questão
-    if (section === "exercise-section") showExercise();
+    if (section === "exercise") showExercise();
+    if (section === "ranking") updateRanking();
 }
 
 // ===== Banco de Exercícios =====
@@ -181,6 +178,8 @@ function checkExercise() {
 
     if (!q || lastChecked) return;
 
+    let acerto = false;
+
     if (q.type === "translate") {
         const answer = document.getElementById("exerciseInput").value.trim().toLowerCase();
         if (!answer) {
@@ -193,6 +192,7 @@ function checkExercise() {
             result.style.color = "green";
             correctCount++;
             scorePoints += 10;
+            acerto = true;
         } else {
             result.textContent = `❌ Errado! Resposta certa: ${q.answer}`;
             result.style.color = "red";
@@ -208,12 +208,15 @@ function checkExercise() {
             result.style.color = "green";
             correctCount++;
             scorePoints += 10;
+            acerto = true;
         } else {
             result.textContent = `❌ Errado! Resposta certa: ${q.answer}`;
             result.style.color = "red";
         }
         document.querySelectorAll("#exerciseOptions button").forEach(btn => btn.disabled = true);
     }
+
+    if (acerto) addToRanking("Você", 10); // atualiza ranking
 
     checkBtn.disabled = true;
     nextBtn.disabled = false;
@@ -227,5 +230,40 @@ function nextExercise() {
     showExercise();
 }
 
+// ===== Ranking de Pontos =====
+let ranking = [
+    { name: "Alice", points: 120 },
+    { name: "Bruno", points: 80 },
+    { name: "Carlos", points: 60 },
+];
+
+function updateRanking() {
+    const rankingBody = document.getElementById("rankingBody");
+    if (!rankingBody) return;
+
+    ranking.sort((a, b) => b.points - a.points);
+    rankingBody.innerHTML = "";
+
+    ranking.forEach((player, index) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${index + 1}º</td>
+            <td>${player.name}</td>
+            <td>${player.points}</td>
+        `;
+        rankingBody.appendChild(row);
+    });
+}
+
+function addToRanking(username, points) {
+    let player = ranking.find(p => p.name === username);
+    if (player) {
+        player.points += points;
+    } else {
+        ranking.push({ name: username, points: points });
+    }
+    updateRanking();
+}
+
 // ===== Inicialização =====
-showSection('home-section');
+showSection('home');

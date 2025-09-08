@@ -11,10 +11,10 @@
     <!-- Barra lateral -->
     <div id="sidebar">
         <h2>Menu</h2>
-            <button onclick="showSection('home-section')">🏠 Início</button>
-            <button onclick="showSection('chat-section')">💬 Chat IA</button>
-            <button onclick="showSection('exercise-section')">📘 Exercícios Rápidos</button>
-
+        <button onclick="showSection('home')">🏠 Início</button>
+        <button onclick="showSection('chat')">💬 Chat IA</button>
+        <button onclick="showSection('exercise')">📘 Exercícios Rápidos</button>
+        <button onclick="showSection('ranking')">🏆 Ranking</button>
     </div>
 
     <!-- Conteúdo principal -->
@@ -31,6 +31,7 @@
                     <li>💬 Um <strong>chat com IA</strong> para treinar conversação.</li>
                     <li>📘 <strong>Exercícios rápidos</strong> para testar seus conhecimentos.</li>
                     <li>⭐ Um sistema de <strong>pontuação</strong> para acompanhar seu progresso.</li>
+                    <li>🏆 Um <strong>ranking</strong> para comparar sua pontuação com outros jogadores.</li>
                 </ul>
                 <p>
                     Use o menu lateral para navegar entre as funcionalidades e comece agora a sua jornada de aprendizado!
@@ -63,7 +64,23 @@
                 <button type="button" id="checkBtn" onclick="checkExercise()">Verificar</button>
                 <button type="button" id="nextBtn" onclick="nextExercise()" disabled>Próxima questão</button>
             </div>
-a        </div>
+        </div>
+
+<div id="ranking-section" class="section hidden">
+    <h3>🏆 Ranking de Pontos</h3>
+    <table id="rankingTable" border="1" width="100%">
+        <thead>
+            <tr>
+                <th>Posição</th>
+                <th>Nome</th>
+                <th>Pontos</th>
+            </tr>
+        </thead>
+        <tbody id="rankingBody">
+            <!-- Preenchido pelo JS -->
+        </tbody>
+    </table>
+</div>
     </div>
 </div>
 
