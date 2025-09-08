@@ -89,10 +89,15 @@ function addTyping() {
 
 // ===== Navegação lateral =====
 function showSection(section) {
+    // esconde todas as seções
     document.querySelectorAll(".section").forEach(s => s.classList.add("hidden"));
-    const sec = document.getElementById(section + "-section");
+
+    // mostra só a seção clicada
+    const sec = document.getElementById(section);
     if (sec) sec.classList.remove("hidden");
-    if (section === "exercise") showExercise();
+
+    // se for exercícios, carregar questão
+    if (section === "exercise-section") showExercise();
 }
 
 // ===== Banco de Exercícios =====
@@ -222,38 +227,5 @@ function nextExercise() {
     showExercise();
 }
 
-// ===== Jogos extras =====
-function startGame(gameType) {
-    const gameArea = document.getElementById("gameArea");
-    if (!gameArea) return;
-
-    if (gameType === "forca") {
-        gameArea.innerHTML = `
-            <h3>🪢 Jogo da Forca</h3>
-            <div class="forca-palavra">_ _ _ _</div>
-            <p>Dica: Animal</p>
-            <input type="text" maxlength="1" placeholder="Digite uma letra">
-            <button>Tentar</button>
-        `;
-    } else if (gameType === "quiz") {
-        gameArea.innerHTML = `
-            <h3>❓ Quiz</h3>
-            <p>Pergunta: Qual é a capital da França?</p>
-            <div class="quiz-options">
-                <button>Paris</button>
-                <button>Roma</button>
-                <button>Londres</button>
-            </div>
-        `;
-    } else if (gameType === "completar") {
-        gameArea.innerHTML = `
-            <h3>✍️ Completar Frases</h3>
-            <p>Complete: "I ____ to school every day."</p>
-            <input type="text" class="completar-input" placeholder="Digite a palavra">
-            <button>Verificar</button>
-        `;
-    }
-}
-
 // ===== Inicialização =====
-showSection('chat');
+showSection('home-section');

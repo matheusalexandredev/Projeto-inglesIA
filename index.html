@@ -11,15 +11,35 @@
     <!-- Barra lateral -->
     <div id="sidebar">
         <h2>Menu</h2>
-        <button type="button" onclick="showSection('chat')">💬 Chat IA</button>
-        <button type="button" onclick="showSection('exercise')">📘 Exercícios Rápidos</button>
+            <button onclick="showSection('home-section')">🏠 Início</button>
+            <button onclick="showSection('chat-section')">💬 Chat IA</button>
+            <button onclick="showSection('exercise-section')">📘 Exercícios Rápidos</button>
+
     </div>
 
     <!-- Conteúdo principal -->
     <div id="mainContent">
+        <!-- Página inicial -->
+        <div id="home-section" class="section">
+            <div class="home-box">
+                <h1>Bem-vindo ao Estudo de Inglês com IA</h1>
+                <p>
+                    Este aplicativo foi criado para ajudar você a aprender inglês de forma 
+                    prática e divertida. Aqui você encontrará:
+                </p>
+                <ul>
+                    <li>💬 Um <strong>chat com IA</strong> para treinar conversação.</li>
+                    <li>📘 <strong>Exercícios rápidos</strong> para testar seus conhecimentos.</li>
+                    <li>⭐ Um sistema de <strong>pontuação</strong> para acompanhar seu progresso.</li>
+                </ul>
+                <p>
+                    Use o menu lateral para navegar entre as funcionalidades e comece agora a sua jornada de aprendizado!
+                </p>
+            </div>
+        </div>
 
         <!-- Chat -->
-        <div id="chat-section" class="section">
+        <div id="chat-section" class="section hidden">
             <div id="chat"></div>
             <div id="chat-input-area">
                 <input type="text" id="userInput" placeholder="Escreva sua mensagem...">
@@ -43,8 +63,7 @@
                 <button type="button" id="checkBtn" onclick="checkExercise()">Verificar</button>
                 <button type="button" id="nextBtn" onclick="nextExercise()" disabled>Próxima questão</button>
             </div>
-        </div>
-
+a        </div>
     </div>
 </div>
 

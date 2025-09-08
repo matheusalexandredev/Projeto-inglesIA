@@ -12,6 +12,50 @@ body {
     display: flex;
     width: 100%;
 }
+/*==============começo==================*/
+/* ===================== Página Inicial ===================== */
+#home-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+
+.home-box {
+  max-width: 720px;
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+.home-box h1 {
+  font-size: 28px;
+  margin-bottom: 18px;
+  color: #2c3e50;
+}
+
+.home-box p {
+  font-size: 16px;
+  margin-bottom: 16px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.home-box ul {
+  text-align: left;
+  margin: 0 auto 20px auto;
+  padding: 0 18px;
+  max-width: 520px;
+}
+
+.home-box ul li {
+  font-size: 15px;
+  margin-bottom: 8px;
+  color: #333;
+  line-height: 1.5;
+}
 
 /* ===================== Sidebar ===================== */
 #sidebar {
