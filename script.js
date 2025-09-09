@@ -232,9 +232,9 @@ function nextExercise() {
 
 // ===== Ranking de Pontos =====
 let ranking = [
-    { name: "Alice", points: 120 },
-    { name: "Bruno", points: 80 },
-    { name: "Carlos", points: 60 },
+    { name: "Matheus", points: 120 },
+    { name: "Vaness", points: 80 },
+    { name: "Vanusa", points: 60 },
 ];
 
 function updateRanking() {
